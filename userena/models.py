@@ -1,10 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 from django.conf import settings
 from django.contrib.sites.models import Site
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
+
 from easy_thumbnails.fields import ThumbnailerImageField
 from guardian.shortcuts import get_perms
 from userena import settings as userena_settings
@@ -37,7 +41,7 @@ def upload_to_mugshot(instance, filename):
                                                'hash': hash[:10],
                                                'extension': extension}
 
-
+@python_2_unicode_compatible
 class UserenaSignup(models.Model):
     """
     Userena model which stores all the necessary information to have a full
@@ -79,7 +83,7 @@ class UserenaSignup(models.Model):
         verbose_name = _('userena registration')
         verbose_name_plural = _('userena registrations')
 
-    def __unicode__(self):
+    def __str__(self):
         return '%s' % self.user.username
 
     def change_email(self, email):
@@ -233,7 +237,7 @@ class UserenaSignup(models.Model):
                   settings.DEFAULT_FROM_EMAIL,
                   [self.user.email, ])
 
-
+@python_2_unicode_compatible
 class UserenaBaseProfile(models.Model):
     """ Base model needed for extra profile functionality """
     PRIVACY_CHOICES = (
@@ -280,7 +284,7 @@ class UserenaBaseProfile(models.Model):
         abstract = True
         permissions = PROFILE_PERMISSIONS
 
-    def __unicode__(self):
+    def __str__(self):
         return 'Profile of %(username)s' % {'username': self.user.username}
 
     def get_mugshot_url(self):
