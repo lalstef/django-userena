@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
 from userena.utils import truncate_words
 from userena.contrib.umessages.managers import (MessageManager, MessageContactManager,
