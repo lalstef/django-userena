@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
-from StringIO import StringIO
+from io import StringIO
 
 from django.utils.translation import ugettext as _
 from django.core.mail import EmailMultiAlternatives
